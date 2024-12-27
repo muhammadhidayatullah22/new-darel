@@ -1,0 +1,164 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9fafb;
+    color: #333;
+}
+
+/* Container Styles */
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #D2E3C8;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Section Styles */
+.form-left, .form-right {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+    .form-left, .form-right {
+        width: 48%;
+        margin-bottom: 0;
+    }
+}
+
+/* Input, Select, Textarea Styles */
+.form-input,
+.form-select,
+.form-textarea {
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    border-color: #2563eb;
+    outline: none;
+}
+
+/* Button Styles */
+
+.btn-cancel {
+    background-color: #dc2626 !important; /* Red button color */
+}
+
+.btn-cancel:hover {
+    background-color: #b91c1c; /* Red button hover color */
+}
+
+.btn-save {
+    background-color: #2563eb !important; /* Green button color */
+}
+
+.btn-save:hover {
+    background-color: #059669; /* Green button hover color */
+}
+
+/* Specific Button Styles */
+.button-bacaan, .button-status {
+    background-color: white !important; /* Tambahkan !important jika perlu */
+    color: black; /* Warna teks */
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: 1px solid #d1d5db; /* Tambahkan border */
+}
+
+.button-bacaan:hover, .button-status:hover {
+    background-color: #d1d5db; /* Warna latar belakang saat hover */
+}
+
+.button-bacaan.selected, .button-status.selected {
+    background-color: #4F6F52 !important; /* Warna latar belakang saat dipilih */
+    color: white;
+}
+
+/* Label Styles */
+label {
+    display: block;
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500;
+    color: #374151;
+}
+
+/* Spacing Utilities */
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.mt-1 {
+    margin-top: 0.25rem;
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+.flex {
+    display: flex;
+}
+
+.space-x-2 {
+    margin-left: -0.5rem;
+}
+
+.space-x-2 > * {
+    margin-left: 0.5rem;
+}
+
+.grid {
+    display: grid;
+}
+
+.grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.gap-4 {
+    gap: 1rem;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+/* Background and Padding Utilities */
+.bg-gray-100 {
+    background-color: #f3f4f6;
+}
+
+.p-6 {
+    padding: 1.5rem;
+}
+
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+
+.shadow-md {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.bg-red-500 {
+    background-color: #ef4444 ;
+}
+
+.text-white {
+    color: white;
+}
+
+.bg-green-500 {
+    background-color: #10b981;
+}

@@ -1,0 +1,467 @@
+/* dashboard.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    height: 100%;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Dashboard Container */
+  .dashboard-container {
+    display: flex;
+    height: 100vh;
+    transition: margin-left 0.3s ease;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 250px;
+    background: linear-gradient(to bottom, #D2E3C8, #739072);
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    padding-top: 20px;
+    z-index: 1000;
+  }
+  
+  .sidebar.collapsed {
+    width: 0;
+    overflow: hidden;
+    transition: width 0.3s ease;
+  }
+  
+  .sidebar-header {
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .user-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    transition: width 0.3s ease;
+  }
+  
+  .sidebar.collapsed .user-image {
+    width: 30px;
+  }
+  
+  .sidebar-menu {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar-menu li {
+    margin: 20px 0;
+  }
+  
+  .sidebar-menu li a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 5px;
+    transition: padding 0.3s ease;
+  }
+  
+  .sidebar-menu li a i {
+    margin-right: 10px; /* Menambah jarak antara ikon dan teks */
+  }
+  
+  .sidebar.collapsed .sidebar-menu li a {
+    justify-content: center;
+    padding: 10px 0;
+  }
+  
+  .sidebar-menu li a .menu-text {
+    display: inline;
+    transition: opacity 0.3s ease;
+  }
+  
+  .sidebar.collapsed .sidebar-menu li a .menu-text {
+    display: none;
+  }
+  
+  .top-bar + .user-infoo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  
+  .top-bar + .user-info span {
+    font-size: 14px;
+    align-items: center;
+    margin-top: 10px;
+    justify-content: center;
+    padding-bottom: 20px;
+  }
+  
+  .sidebar.collapsed .user-infoo {
+    opacity: 0;
+    display: none;
+  }
+  
+  .profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .profile-image {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  
+  /* Top Bar */
+  .top-bar {
+    height: 60px;
+    background-color: #D2E3C8;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 250px;
+    width: calc(100% - 250px);
+    transition: left 0.3s ease, width 0.3s ease;
+    z-index: 1000;
+  }
+  
+  .sidebar.collapsed + .top-bar {
+    left: 0;
+    width: 100%;
+  }
+  
+  .logo-top-bar {
+    margin-left: 10px;
+    max-width: 50px;
+  }
+  
+  /* Content */
+  .content {
+    margin-top: 60px;
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+    transition: margin-left 0.3s ease;
+    position: relative;
+    z-index: 900;
+  }
+  
+  .sidebar.collapsed + .content {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  /* Toggle Button */
+  .button {
+    background: #D2E3C8;
+    border: 1px solid black;
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    padding: 0;
+    margin-left: -20px;
+    opacity: 0.6;
+    scale: 0.7;
+    border-radius: 8px;
+    transition: 0.25s;
+  }
+  
+  .button:hover {
+    opacity: 1;
+    background: #4F6F52;
+  }
+  
+  /* Burger Icon */
+  .burger {
+    position: relative;
+    width: 24px;
+    border: 0;
+  }
+  
+  .burger,
+  .burger::before,
+  .burger::after {
+    display: block;
+    border-radius: 2px;
+    height: 2px;
+    background: black;
+    transition: 0.3s;
+  }
+  
+  .burger::before,
+  .burger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+  }
+  
+  .burger::before {
+    top: -8px;
+  }
+  
+  .burger::after {
+    top: 8px;
+  }
+  
+  
+  .burger.burger-5 {
+    transition: none;
+    height: 0;
+  }
+  
+  .burger.burger-5::before,
+  .burger.burger-5::after {
+    transition-timing-function: linear;
+    transition-duration: 0.15s;
+  }
+  
+  .burger.burger-5::before {
+    top: -4px;
+  }
+  
+  .burger.burger-5::after {
+    top: 3px;
+  }
+  
+  .burger.burger-5.is-closed::before {
+    transform: rotate(-45deg) translate(-3px, 2px);
+  }
+  
+  .burger.burger-5.is-closed::after {
+    transform: rotate(45deg) translate(-2px, -3px);
+  }
+  
+  .burger.is-closed::before {
+    transform: rotate(-45deg) translate(-3px, 2px);
+  }
+  
+  .burger.is-closed::after {
+    transform: rotate(45deg) translate(-2px, -3px);
+  }
+  
+  .burger.is-closed {
+    background: transparent; /* Hilangkan garis tengah */
+  }
+  
+  /* Logout Button (Loading State) */
+  .logout-btn.loading {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .sidebar-menu li a.active {
+      background-color: #4F6F52; /* Warna sorotan */
+      color: white;
+      border-radius: 4px;
+      padding: 10px;
+      transition: background-color 0.3s;
+  }
+  
+  /* Jika Anda ingin menyembunyikan elemen lain di dalam sidebar */
+  .sidebar.collapsed .sidebar-content {
+    display: none;
+  }
+  
+  .profile-container {
+    position: relative; /* Container becomes a reference for positioning */
+    display: inline-block; /* Ensures proper alignment with the image */
+  }
+  
+  .profile-image {
+    cursor: pointer;
+  }
+  
+  .dropdown-menu {
+    display: none; /* Hide by default */
+    position: absolute;
+    top: 60px; /* Adjust based on your top bar height */
+    right: 0;
+    z-index: 1050;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    min-width: 150px;
+    max-width: 200px;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .dropdown-menu.show {
+    display: block; /* Show when toggled */
+    transform: translateX(-50%); /* Center the dropdown */
+    left: 50%; /* Center the dropdown */
+  }
+  
+  .dropdown-menu a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    white-space: nowrap; /* Hindari teks terpotong */
+  }
+  
+  .dropdown-menu a:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 0;
+      overflow: hidden;
+      transition: width 0.3s ease;
+    }
+  
+    .sidebar.collapsed {
+      width: 0; /* Tetap dalam keadaan tertutup */
+    }
+  
+    .sidebar:not(.collapsed) {
+      width: 150px; /* Buka sidebar pada layar kecil */
+    }
+  
+    .sidebar:not(.collapsed) + .top-bar .user-info {
+      display: none; /* Sembunyikan user info ketika sidebar terbuka */
+    }
+  
+    .user-info span{
+      display: none;
+    }
+  
+    .sidebar-menu li a {
+      justify-content: center;
+      font-size: 14px;
+    }
+  
+    .sidebar-menu li a .menu-text {
+      display: inline;
+    }
+  
+    .top-bar {
+      left: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+    }
+  
+    .sidebar.collapsed + .top-bar {
+      left: 0;
+      width: 100%;
+    }
+  
+    .content {
+      margin-left: 0;
+      width: 100%;
+    }
+  
+    .sidebar.collapsed + .content {
+      margin-left: 0;
+      width: 100%;
+    }
+  
+    .user-image {
+      width: 50px;
+      height: 50px;
+    }
+  
+    .top-bar h1 {
+      font-size: 16px;
+      margin: 0;
+      flex-grow: 1;
+      text-align: center;
+    }
+  
+    .button {
+      margin-right: 10px;
+      margin-left: -10px;
+    }
+  
+    .user-info {
+      flex-direction: column; /* Atur elemen secara vertikal */
+      align-items: flex-start; /* Rata kiri */
+    }
+  
+    .logo-top-bar {
+      margin-left: -5px;
+      max-width: 50px;
+      padding-right: 10px;
+    }
+  
+    .user-info span,
+    .logout-btn {
+      font-size: 14px; /* Ukuran font lebih kecil */
+    }
+  
+    /* Responsive adjustments for user info text */
+    .user-info .user-name,
+    .user-info .role {
+      font-size: 16px; /* Sesuaikan ukuran font sesuai kebutuhan */
+    }
+  }
+  
+  .modal {
+      z-index: 1050;
+  }
+  
+  .burger.burger-3::before,
+  .burger.burger-3::after {
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+  }
+  
+  .burger.burger-3.is-closed::before,
+  .burger.burger-3.is-closed::after {
+    width: 20px;
+  }
+  
+  .burger.burger-3.is-closed::before {
+    transform: rotate(-45deg) translate(-4px, -2px);
+  }
+  
+  .burger.burger-3.is-closed::after {
+    transform: rotate(45deg) translate(-4px, 2px);
+  }
+  
