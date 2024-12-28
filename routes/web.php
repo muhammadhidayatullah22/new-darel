@@ -42,5 +42,6 @@ Route::post('/hafalan', [HafalanController::class, 'store'])->name('hafalan.stor
 Route::delete('/hafalan/{id}', [HafalanController::class, 'destroy'])->name('hafalan.destroy');
 
 Route::get('/get-ayat-by-surah/{surahId}', [HafalanController::class, 'getAyatBySurah']);
+Route::get('/get-juz-by-ayat/{surahId}/{ayatNumber}', [HafalanController::class, 'getJuzByAyat']);
 
 Route::post('/hafalan/store', [HafalanController::class, 'store'])->name('hafalan.store');

@@ -101,13 +101,17 @@
         const surahSelectId = @json($isEdit ? 'editSurah' : 'surah');
         const ayatAwalSelectId = @json($isEdit ? 'editAyatAwal' : 'ayat_awal');
         const ayatAkhirSelectId = @json($isEdit ? 'editAyatAkhir' : 'ayat_akhir');
+        const juzSelectId = @json($isEdit ? 'editJuz' : 'juz');
 
         const surahSelect = document.getElementById(surahSelectId);
         const ayatAwalSelect = document.getElementById(ayatAwalSelectId);
         const ayatAkhirSelect = document.getElementById(ayatAkhirSelectId);
+        const juzSelect = document.getElementById(juzSelectId);
 
         function updateAyatOptions() {
             const surahId = surahSelect.value; // Ambil ID surah yang dipilih
+            if (!surahId) return;
+
             fetch(`/get-ayat-by-surah/${surahId}`)
                 .then(response => response.json())
                 .then(data => {
@@ -118,45 +122,63 @@
                         const option = document.createElement('option');
                         option.value = ayah.number_in_surah;
                         option.textContent = ayah.number_in_surah;
+
                         ayatAwalSelect.appendChild(option);
                         ayatAkhirSelect.appendChild(option.cloneNode(true)); // Menambahkan opsi yang sama untuk ayat akhir
                     });
 
-                    // Tambahkan event listener untuk ayat awal
+                    // Tambahkan event listener untuk validasi Ayat Akhir
                     ayatAwalSelect.addEventListener('change', function() {
                         const ayatAwalValue = parseInt(this.value);
                         const ayatAkhirOptions = Array.from(ayatAkhirSelect.options);
                         ayatAkhirOptions.forEach(option => {
-                            option.disabled = parseInt(option.value) < ayatAwalValue; // Nonaktifkan opsi yang kurang dari ayat awal
+                            option.disabled = parseInt(option.value) < ayatAwalValue; // Nonaktifkan opsi kurang dari Ayat Awal
                         });
                     });
-                });
+                })
+                .catch(error => console.error('Error fetching ayat:', error));
         }
 
-        // Update options saat halaman dimuat
+        function fetchAndUpdateJuz(surahId, ayahNumber, targetJuzField) {
+            if (!surahId || !ayahNumber) return;
+
+            fetch(`/get-juz-by-ayat/${surahId}/${ayahNumber}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.juz) {
+                        targetJuzField.value = data.juz; // Update Juz field
+                    } else {
+                        targetJuzField.value = ''; // Kosongkan jika tidak ditemukan
+                    }
+                })
+                .catch(error => console.error('Error fetching Juz:', error));
+        }
+
+        // Update opsi ayat dan Juz saat Surah diubah
         if (surahSelect) {
             updateAyatOptions();
-            surahSelect.addEventListener('change', updateAyatOptions);
+            surahSelect.addEventListener('change', function() {
+                updateAyatOptions();
+                // Kosongkan nilai Juz saat surah berubah
+                juzSelect.value = '';
+            });
         }
-    });
 
-    document.addEventListener('DOMContentLoaded', function() {
-        // Update nilai input hidden berdasarkan tombol yang diklik
-        document.querySelectorAll('.button-bacaan').forEach(button => {
-            button.addEventListener('click', function() {
-                document.getElementById('bacaan').value = this.dataset.value;
+        // Update Juz saat Ayat Awal atau Akhir diubah
+        if (ayatAwalSelect) {
+            ayatAwalSelect.addEventListener('change', function() {
+                const surahId = surahSelect.value;
+                const ayatAwalValue = this.value;
+                fetchAndUpdateJuz(surahId, ayatAwalValue, juzSelect);
             });
-        });
+        }
 
-        document.querySelectorAll('.button-status').forEach(button => {
-            button.addEventListener('click', function() {
-                document.getElementById('status').value = this.dataset.value;
+        if (ayatAkhirSelect) {
+            ayatAkhirSelect.addEventListener('change', function() {
+                const surahId = surahSelect.value;
+                const ayatAkhirValue = this.value;
+                fetchAndUpdateJuz(surahId, ayatAkhirValue, juzSelect);
             });
-        });
-    });
-
-    surahSelect.addEventListener('change', function() {
-        const selectedOption = this.options[this.selectedIndex];
-        document.getElementById('surah_name').value = selectedOption.dataset.name; // Ambil nama surah
+        }
     });
 </script>

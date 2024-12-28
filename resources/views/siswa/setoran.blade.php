@@ -4,14 +4,16 @@
     <div class="w-full mx-auto mt-8 px-4 py-8" x-data="{ openModal: false, openEditModal: false }">
         <p class="text-lg font-bold uppercase text-left mb-2">Setoran Hafalan Siswa</p>
         <div class="card-body mb-4" style="background: linear-gradient(to right, #4F6F52, #98D59D);">
-            <h1 class="text-xs font-thin text-left mb-0">Nama Siswa</h1>
+            <h1 class="text-sm font-light text-left mb-0">Nama Siswa</h1>
             <h2 class="text-xl font-bold mb-4 text-left">{{ $siswa->nama }}</h2>
-            <h1 class="text-xs font-thin text-left mb-0">NIS</h1>
+            <h1 class="text-sm font-light text-left mb-0">NIS</h1>
             <h2 class="text-xl font-bold text-left">{{ $siswa->nis }}</h2>
+            <h3 class="text-sm font-light text-left mb-0">Jumlah Hafalan</h3>
+            {{-- <h3 class="text-xl font-bold text-left">{{ $juzHafal }} Juz</h3> --}}
         </div>
         <!-- Search Bar Tanggal -->
         <div class="flex justify-between items-center mb-4">
-            <input type="date" id="searchDate" class="form-input form-input-sm border rounded px-2 py-1 w-auto focus:outline-none focus:ring focus:border-blue-300" placeholder="Cari berdasarkan tanggal">
+            <input type="date" id="searchDate" class="form-input form-input-sm border rounded px-2 py-1 w-auto focus:outline-none focus:ring focus:border-blue-300" placeholder="Cari berdasarkan tanggal" oninput="filterByDate(this, 'hafalanTable')">
             <button type="button" class="btn btn-primary btn-sm" @click="openModal = true">Tambah</button>
         </div>
 
