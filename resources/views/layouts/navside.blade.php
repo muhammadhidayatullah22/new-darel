@@ -66,7 +66,7 @@
             <button class="button" onclick="toggleSidebar()">
                 <span class="burger burger-3 is-closed"></span>
             </button>
-            <h1 class="text-2xl uppercase font-bold">
+            <h1 class="text-4xl uppercase font-bold">
                 @if(Request::routeIs('dashboard'))
                     Dashboard
                 @elseif(Request::routeIs('kelas'))
@@ -75,6 +75,14 @@
                     Quran
                 @elseif(Request::routeIs('laporan'))
                     Laporan
+                @elseif(Request::routeIs('profile'))
+                    Profile
+                @elseif(Request::routeIs('kelas.show'))
+                    Detail Kelas
+                @elseif(Request::routeIs('siswa.setoran'))
+                    Setoran Hafalan
+                @elseif(Request::routeIs('laporan.siswa-data'))
+                    Data Perkembangan
                 @endif
             </h1>
             <div class="user-info">

@@ -54,6 +54,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/surah/{id}', [SurahController::class, 'show'])->name('surah.show');
 
 Route::get('/kelas/perkembangan/{id}',[PerkembanganSiswaController::class, 'show'])->name('kelas.data-perkembangan');
-
 Route::get('/laporan/siswa-data/{id}', [LaporanController::class, 'siswaPerkembangan'])->name('laporan.siswa-data');
 Route::post('/laporan/update-data-bulk', [LaporanController::class, 'updateDataBulk'])->name('laporan.updateDataBulk');
+
