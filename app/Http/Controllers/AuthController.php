@@ -14,7 +14,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'username' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|in:guru,kepala_sekolah',
         ]);
@@ -22,9 +22,9 @@ class AuthController extends Controller
         // Set default image path
         $imagePath = 'images/default.png';
 
-        $user = User::create([
+        User::create([
             'name' => $request->name,
-            'email' => $request->email,
+            'username' => $request->username,
             'password' => Hash::make($request->password),
             'role' => $request->role,
             'image' => $imagePath,
@@ -37,12 +37,13 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|string|email',
+            'username' => 'required|string',
             'password' => 'required|string',
         ]);
 
-        if (!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json(['message' => 'Incorrect email or password'], 401);
+        if (!Auth::attempt($request->only('username', 'password'))) {
+            // Mengarahkan kembali dengan pesan error
+            return redirect()->back()->with('error', 'Email atau password salah.');
         }
 
         $user = Auth::user();
@@ -53,10 +54,16 @@ class AuthController extends Controller
     }
 
     // Metode untuk logout
-    public function logout(Request $request)
+public function logout(Request $request)
     {
+        // Hapus semua token pengguna
         $request->user()->tokens()->delete();
 
+        // Invalidate session
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // Kembalikan respons JSON
         return response()->json(['message' => 'Successfully logged out']);
     }
 

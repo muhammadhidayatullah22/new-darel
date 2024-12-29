@@ -1,9 +1,6 @@
 @php
     $isEdit = $isEdit ?? false; // Default ke false jika $isEdit tidak tersedia
 @endphp
-
-<form method="POST" action="{{ route('hafalan.store') }}">
-    @csrf
     <div class="form-container">
         <div class="form-left">
             <!-- Field Tanggal -->
@@ -94,8 +91,9 @@
             </div>
         </div>
     </div>
-</form>
 
+
+    
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const surahSelectId = @json($isEdit ? 'editSurah' : 'surah');
@@ -180,5 +178,26 @@
                 fetchAndUpdateJuz(surahId, ayatAkhirValue, juzSelect);
             });
         }
+
+        // Update nilai input hidden berdasarkan tombol yang diklik
+        document.querySelectorAll('.button-bacaan').forEach(button => {
+            button.addEventListener('click', function() {
+                // Mengubah warna tombol yang aktif
+                document.querySelectorAll('.button-bacaan').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                document.getElementById('bacaan').value = this.dataset.value;
+            });
+        });
+
+        document.querySelectorAll('.button-status').forEach(button => {
+            button.addEventListener('click', function() {
+                // Mengubah warna tombol yang aktif
+                document.querySelectorAll('.button-status').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                document.getElementById('status').value = this.dataset.value;
+            });
+        });
     });
 </script>

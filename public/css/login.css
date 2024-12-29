@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #D2E3C8, #739072);
+    background: linear-gradient(to bottom, #d2e3c8, #739072);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,7 +63,7 @@ body {
 }
 
 .login-btn {
-    background-color: #4F6F52;
+    background-color: #4f6f52;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -80,17 +80,44 @@ body {
 }
 
 .alert-card {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-    border-radius: 4px;
-    padding: 10px 10px;
-    margin-bottom: 20px;
-    text-align: center;
-    width: 100%;
-    max-width: 500px;
-    position: relative;
-    z-index: 1;
+    background-color: #f8d7da; /* Warna latar belakang untuk error */
+    color: #721c24; /* Warna teks untuk error */
+    border: 1px solid #f5c6cb; /* Warna border untuk error */
+    border-radius: 8px; /* Membuat sudut lebih bulat */
+    padding: 15px; /* Menambah padding untuk ruang yang lebih baik */
+    margin: 15px auto; /* Menambahkan margin atas dan bawah, dan mengatur posisi tengah */
+    text-align: center; /* Memusatkan teks */
+    width: 90%; /* Mengatur lebar menjadi 90% untuk responsivitas */
+    max-width: 500px; /* Meningkatkan lebar maksimum */
+    position: relative; /* Mempertahankan posisi relatif */
+    z-index: 1; /* Menjaga elemen di atas */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan untuk efek kedalaman yang lebih kuat */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Menambahkan transisi untuk efek hover */
+}
+
+.alert-card:hover {
+    transform: scale(1.02); /* Efek zoom saat hover */
+}
+
+.alert-card .icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.close-btn {
+    background-color: transparent; /* Latar belakang transparan */
+    color: #721c24; /* Warna teks untuk tombol */
+    border: none; /* Tanpa border */
+    cursor: pointer; /* Menunjukkan bahwa ini adalah tombol yang dapat diklik */
+    font-size: 20px; /* Ukuran font untuk tombol X */
+    position: absolute; /* Memposisikan tombol secara absolut */
+    top: 10px; /* Jarak dari atas */
+    right: 10px; /* Jarak dari kanan */
+    padding: 0; /* Menghilangkan padding */
+}
+
+.close-btn:hover {
+    color: #a71c24; /* Warna saat hover */
 }
 
 @media (max-width: 768px) {
@@ -120,5 +147,3 @@ body {
         width: 100%;
     }
 }
-
-

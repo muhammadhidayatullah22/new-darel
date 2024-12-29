@@ -20,11 +20,13 @@
                 </div>
 
                 <!-- Tombol Update Data Laporan -->
+                @if(auth()->user()->isGuru())    
                 <a 
                     href="{{ route('laporan.siswa-data', ['id' => $id]) }}" 
                     class="btn btn-primary btn-sm px-4">
                     Update
                 </a>
+                @endif
             </div>
             <table id="siswa-table" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-lg text-white uppercase bg-ma-bg">
@@ -40,9 +42,9 @@
                 <tbody>
                     @foreach($siswa as $s)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td class="px-6 py-4 font-medium">{{ $s->nama }}</td>
-                        <td class="px-6 py-4 text-center">{{ $s->nis }}</td>
-                        <td class="px-6 py-4 text-center">{{ $s->laporan->last()->jumlah_hafalan ?? 0 }} Juz</td>
+                        <td class="px-6 py-4 text-sm text-black font-bold uppercase">{{ $s->nama }}</td>
+                        <td class="px-6 py-4 text-black font-medium text-center">{{ $s->nis }}</td>
+                        <td class="px-6 py-4 text-black font-medium text-center">{{ $s->laporan->last()->jumlah_hafalan ?? 0 }} Juz</td>
                         @if(auth()->user()->isGuru())
                             <td class="px-6 py-4 text-center">
                                 <form action="{{ route('siswa.setoran', $s->id) }}" method="GET">

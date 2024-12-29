@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Login</title>
 </head>
 <body>
@@ -18,8 +19,8 @@
             <form method="POST" action="{{ route('api.login') }}">
                 @csrf
                 <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="text" id="email" name="email" placeholder="Enter your email" required>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
                 </div>
                 <div class="input-group">
                     <label for="password">Password</label>
@@ -27,8 +28,12 @@
                 </div>
                 @if(session('success') || session('error'))
                 <div class="alert-card">
-                    <p>{{ session('success') ?? session('error') }}</p>
+                    <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+                    <div class="icon">
+                        <i class="fas fa-exclamation-circle"></i>
                     </div>
+                    <p>{{ session('success') ?? session('error') }}</p>
+                </div>
                 @endif
                 <button type="submit" class="login-btn">Login</button>
             </form>

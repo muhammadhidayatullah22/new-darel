@@ -31,7 +31,7 @@
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <img src="{{ asset('images/logo-pondok.png') }}" alt="User Image" class="user-image">
+                <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="User Image" class="user-image">
                 <div class="user-info-sidebar">
                     <h4 class="user-name">{{ auth()->user()->name }}</h4>
                     <span class="role">{{ auth()->user()->role }}</span>
@@ -89,7 +89,7 @@
                 <span>Welcome, {{ auth()->user()->name }}</span>
                 <div class="profile-container"> 
                     <button class="profile-image">
-                        <img src="{{ asset('images/logo-pondok.png') }}" alt="User Image" class="user-image-profile">
+                        <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="User Image" class="w-10 h-10 rounded-full border-2 border-solid border-ma-bg user-image">
                     </button>
                     <div id="profileDropdown" class="dropdown-menu">
                         <a href="{{ route('profile') }}">Profile</a>

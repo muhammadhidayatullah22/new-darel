@@ -60,4 +60,5 @@
 
         @include('modals.modals')
     </div>
+    <script src="{{ asset('js/hafalan.js') }}"></script>
 @endsection

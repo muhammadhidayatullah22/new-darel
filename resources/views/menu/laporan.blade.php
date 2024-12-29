@@ -13,8 +13,9 @@
 
 <!-- Informasi Kelas dan Bulan -->
 <div class="text-left print:text-left">
-    <p class="text-lg font-semibold text-gray-700">KELAS : 8E</p>
-    <p class="text-lg font-semibold text-gray-700">BULAN : September 2024</p>
+    <p class="text-lg font-semibold text-gray-700">JENIS KELAS : {{ request('jenis_kelas') }}</p>
+    <p class="text-lg font-semibold text-gray-700">KELAS : {{ $kelasList->firstWhere('id', request('kelas'))->kelas ?? 'Tidak Ditemukan' }} - {{ $kelasList->firstWhere('id', request('kelas'))->gender_kelas ?? 'Tidak Ditemukan' }}</p>
+    <p class="text-lg font-semibold text-gray-700">BULAN : {{ date('F', mktime(0, 0, 0, request('bulan'), 10)) }} {{ request('tahun') }}</p>
 </div>
         <form class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4" method="GET" action="{{ route('laporan') }}">
             <div class="flex flex-col w-full md:w-1/3">
