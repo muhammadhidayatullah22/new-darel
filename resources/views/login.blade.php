@@ -25,11 +25,11 @@
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="Enter your password" required>
                 </div>
-                {{-- @if(session('success') || session('error'))
+                @if(session('success') || session('error'))
                 <div class="alert-card">
                     <p>{{ session('success') ?? session('error') }}</p>
                     </div>
-                @endif --}}
+                @endif
                 <button type="submit" class="login-btn">Login</button>
             </form>
         </div>

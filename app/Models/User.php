@@ -32,4 +32,9 @@ class User extends Authenticatable
             'role' => 'string',
         ];
     }
+
+    public function isGuru()
+    {
+        return $this->role === 'guru';
+    }
 }

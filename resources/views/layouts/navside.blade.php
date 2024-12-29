@@ -14,7 +14,7 @@
             @endif
     </title>
     
-    
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="{{ asset('css/navside.css') }}">
     <link rel="stylesheet" href="{{ asset('css/hafalan.css') }}">
     <!-- Tailwind CSS -->
@@ -66,7 +66,7 @@
             <button class="button" onclick="toggleSidebar()">
                 <span class="burger burger-3 is-closed"></span>
             </button>
-            <h1>
+            <h1 class="text-2xl uppercase font-bold">
                 @if(Request::routeIs('dashboard'))
                     Dashboard
                 @elseif(Request::routeIs('kelas'))
@@ -104,10 +104,12 @@
         const csrfToken = "{{ csrf_token() }}";
     </script>
     
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{{ asset('js/dashboard.js') }}"></script>
-    <script src="{{ asset('js/hafalan.js') }}" defer></script>
+    
 </body>
 </html>

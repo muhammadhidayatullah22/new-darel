@@ -53,4 +53,10 @@ class KelasController extends Controller
             'siswa' => $siswa
         ]);
     }
+
+    public function laporan()
+    {
+        $kelas = Kelas::all();
+        return view('menu.laporan', ['kelas' => $kelas]);
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Hafalan;
+use App\Models\DataSiswa;
 
 class Siswa extends Model
 {
@@ -17,6 +18,11 @@ class Siswa extends Model
     public function hafalan()
     {
         return $this->hasMany(Hafalan::class);
+    }
+
+    public function laporan()
+    {
+        return $this->hasMany(Laporan::class);
     }
 }
 

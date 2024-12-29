@@ -38,4 +38,19 @@ class SurahController extends Controller
 
         return response()->json(['message' => 'Failed to fetch data.'], 500);
     }
+
+    public function index()
+    {
+        $surahs = Surah::all();
+        return view('menu.quran', compact('surahs'));
+    }
+
+    public function show($id)
+    {
+        $surah = Surah::findOrFail($id);
+        $ayahs = $surah->ayahs;
+        $jumlahAyat = $surah->numberOfAyahs;
+
+        return view('quran.view-quran', compact('surah', 'ayahs', 'jumlahAyat'));
+    }
 }
