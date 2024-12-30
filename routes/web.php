@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\HafalanController;
@@ -17,15 +19,32 @@ Route::get('/', function () {
 
 // Rute untuk dashboard
 Route::get('/dashboard', function () {
-    return view('menu.dashboard');
+    // Mendapatkan jumlah total pengguna
+    $totalUsers = User::count();
+    
+    // Mendapatkan jumlah pengguna online (berdasarkan aktivitas sesi)
+    $onlineUsers = DB::table('sessions')
+        ->where('last_activity', '>=', now()->subMinutes(5)) // Sesuaikan dengan kriteria Anda
+        ->whereNotNull('user_id')
+        ->count();
+    
+    // Opsional, Anda dapat mengambil semua sesi
+    $sessions = DB::table('sessions')->get();
+
+    // Kirimkan data ke tampilan dashboard
+    return view('menu.dashboard', compact('totalUsers', 'onlineUsers', 'sessions'));
 })->middleware('auth')->name('dashboard');
+
+// Rute lainnya...
+
+
 
 // Rute untuk kelas
 Route::get('/kelas', function () {
     return view('menu.kelas');
-})->middleware('auth')->name('kelas');
-Route::get('/kelas/{id}', [KelasController::class, 'show'])->middleware('auth')->name('kelas.show');
-Route::get('/kelas/perkembangan/{id}', [PerkembanganSiswaController::class, 'show'])->middleware('auth')->name('kelas.data-perkembangan');
+})->name('kelas');
+Route::get('/kelas/{id}', [KelasController::class, 'show'])->name('kelas.show');
+Route::get('/kelas/perkembangan/{id}', [PerkembanganSiswaController::class, 'show'])->name('kelas.data-perkembangan');
 
 // Rute untuk profil
 

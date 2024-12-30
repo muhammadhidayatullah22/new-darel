@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modernisasi</title>
+    <title>Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -16,6 +16,7 @@
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body class="bg-gray-100 text-gray-800 font-roboto">
     <section class="text-gray-800 body-font">
@@ -23,33 +24,23 @@
             <!-- Statistik Pengguna Terdaftar dan Berita dari Eramuslim -->
             <div class="mb-10 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-[#BFD8AF] p-6 rounded-lg shadow-lg card">
-                    <h2 class="text-lg font-bold mb-4">Statistik Pengguna</h2>
-                    <p class="text-gray-900">Jumlah Pengguna Terdaftar: <span class="text-blue-700"></span></p>
-                    <p class="text-lg font-bold mb-4 text-red-700">Jika Melihat Keanehan Dalam Pengguna Terdaftar Mohon Laporkan</p>
+                    <h2 class="text-3xl font-bold mb-4 text-center">Statistik Pengguna</h2>
+                    <p class="text-gray-900 text-2xl">Jumlah Pengguna Terdaftar: <span class="text-blue-700 font-semibold text-2xl">{{ $totalUsers }}</span></p>
+                    <p class="text-gray-900 text-2xl">Jumlah Pengguna Online: <span class="text-blue-700 font-semibold text-2xl">{{ $onlineUsers }}</span></p>
+                    
+                    <!-- Memindahkan teks merah lebih jauh ke bawah -->
+                    <div class="mt-10">
+                        <p class="text-lg font-bold text-red-700 text-center">Jika Melihat Keanehan Dalam Pengguna Terdaftar Mohon Laporkan</p>
+                    </div>
                 </div>
+                
+                
                 <div class="bg-[#BFD8AF] p-6 rounded-lg shadow-lg card">
                     <h2 class="text-lg font-bold mb-4">Berita Terbaru dari Darel Hikmah Pekanbaru</h2>
                     <iframe src="https://www.ppdh.sch.id//" width="100%" height="400" frameborder="0" class="rounded-lg shadow-lg"></iframe>
                 </div>
             </div>
-            <!-- Grafik -->
-            <div class="mb-10">
-                <h2 class="text-lg font-bold mb-4">Grafik Perkembangan Hafalan</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-[#BFD8AF] p-6 rounded-lg shadow-lg card">
-                        <h3 class="text-lg font-semibold mb-4 text-gray-900">Perkembangan Hafalan Siswa</h3>
-                        <canvas id="hafalanSiswaChart"></canvas>
-                    </div>
-                    <div class="bg-[#BFD8AF] p-6 rounded-lg shadow-lg card">
-                        <h3 class="text-lg font-semibold mb-4 text-gray-900">Perkembangan Setoran Hafalan Bulan Ini</h3>
-                        <canvas id="setoranBulanChart"></canvas>
-                    </div>
-                    <div class="bg-[#BFD8AF] p-6 rounded-lg shadow-lg card">
-                        <h3 class="text-lg font-semibold mb-4 text-gray-900">Setoran Hafalan Tahunan</h3>
-                        <canvas id="setoranTahunChart"></canvas>
-                    </div>
-                </div>
-            </div>
+            
             <!-- Kalender Hari Besar Islam -->
             <div class="mb-10">
                 <h2 class="text-lg font-bold mb-4">Kalender Hari Besar Islam</h2>
@@ -80,9 +71,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
+            <!-- Pengguna Online -->
+         
     <script>
         // Perkembangan Hafalan Siswa Chart
         const ctx1 = document.getElementById('hafalanSiswaChart').getContext('2d');
@@ -171,6 +161,15 @@
         }
         setInterval(updateTime, 1000);
         updateTime();
+
+        function fetchOnlineUsers() {
+            $.get('/api/online-users', function(data) {
+                $('#online-users').text(data.online_users);
+            });
+        }
+
+        // Panggil fungsi fetchOnlineUsers setiap 10 detik
+        setInterval(fetchOnlineUsers, 10000);
     </script>
 </body>
 </html>

@@ -64,18 +64,26 @@
                                     class="w-full border border-gray-300 rounded-lg p-2 bg-gray-100">
                             </td>
                             <td class="px-6 py-4">
-                                <div class="grid grid-cols-5 gap-1">
-                                    @for ($j = 1; $j <= 30; $j++)
-                                        <label class="inline-flex items-center">
-                                            <input 
-                                                type="checkbox" 
-                                                name="siswa[{{ $index }}][juz][]" 
-                                                value="{{ $j }}"
-                                                class="form-checkbox border-gray-300 rounded focus:ring focus:ring-blue-200"
-                                                onchange="hitungJumlahHafalan({{ $index }})">
-                                            <span class="ml-1 text-sm">Juz {{ $j }}</span>
-                                        </label>
-                                    @endfor
+                                <button type="button" 
+                                        class="bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-gray-600 transition duration-200" 
+                                        onclick="toggleJuzPopup({{ $index }})">
+                                    Pilih Juz
+                                </button>
+                                <div id="juzPopup_{{ $index }}" class="hidden absolute bg-white border rounded-lg shadow-lg p-4 z-20">
+                                    <div class="grid grid-cols-5 gap-1">
+                                        @for ($j = 1; $j <= 30; $j++)
+                                            <label class="inline-flex items-center">
+                                                <input 
+                                                    type="checkbox" 
+                                                    name="siswa[{{ $index }}][juz][]" 
+                                                    value="{{ $j }}"
+                                                    class="form-checkbox border-gray-300 rounded focus:ring focus:ring-blue-200"
+                                                    onchange="hitungJumlahHafalan({{ $index }})">
+                                                <span class="ml-1 text-sm">Juz {{ $j }}</span>
+                                            </label>
+                                        @endfor
+                                    </div>
+                                    <button type="button" class="mt-2 text-red-500" onclick="toggleJuzPopup({{ $index }})">Tutup</button>
                                 </div>
                             </td>
                             <td class="px-6 py-4">
@@ -166,5 +174,11 @@
             }
         });
     });
+
+    // Fungsi untuk toggle popup Juz
+    function toggleJuzPopup(index) {
+        const popup = document.getElementById(`juzPopup_${index}`);
+        popup.classList.toggle('hidden');
+    }
 </script>
 @endsection

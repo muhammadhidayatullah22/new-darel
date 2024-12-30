@@ -24,8 +24,8 @@
             <input class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" name="name" required="" type="text" value="{{ auth()->user()->name }}"/>
         </div>
         <div>
-            <label class="block text-sm font-medium text-gray-700" for="email">Email:</label>
-            <input class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" name="email" required="" type="email" value="{{ auth()->user()->email }}"/>
+            <label class="block text-sm font-medium text-gray-700" for="username">username:</label>
+            <input class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" name="username" required="" type="username" value="{{ auth()->user()->username }}"/>
         </div>
         <div>
             <label class="block text-sm font-medium text-gray-700" for="image">Foto Profil:</label>
